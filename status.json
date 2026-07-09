@@ -1,9 +1,9 @@
 {
-  "updated": "2026-07-10 11:35 NZST",
-  "state": "working",
-  "current_role": "digest",
-  "today_done": 1,
-  "total_done": 13,
+  "updated": "2026-07-10 11:40 NZST",
+  "state": "idle",
+  "current_role": "",
+  "today_done": 2,
+  "total_done": 14,
   "backlog_open": 1,
   "uptime": "12h"
 }
