@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>lewis's brain</title>
+<style>
+  :root { --bg:#0d1117; --panel:#161b22; --line:#2b3444; --ink:#e6edf3;
+          --dim:#8b949e; --faint:#6e7681; --on:#3fb950; --off:#6e7681;
+          --mono:'SFMono-Regular',ui-monospace,'JetBrains Mono',Menlo,Consolas,monospace; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink); font:15px/1.6 var(--mono);
+         min-height:100vh; display:flex; align-items:center; justify-content:center; }
+  .card { max-width:560px; width:92%; background:var(--panel); border:1px solid var(--line);
+          border-radius:14px; padding:34px 36px; text-align:center; }
+  h1 { font-size:22px; margin:0 0 4px; letter-spacing:.5px; }
+  .sub { color:var(--dim); font-size:12.5px; margin-bottom:26px; }
+  .pulse { display:inline-flex; align-items:center; gap:10px; font-size:17px; margin-bottom:6px; }
+  .dot { width:12px; height:12px; border-radius:50%; background:var(--off); }
+  .dot.on { background:var(--on); animation:pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.25} }
+  .doing { color:var(--dim); font-size:13px; min-height:20px; margin-bottom:26px; }
+  .grid { display:grid; grid-template-columns:repeat(2,1fr); gap:12px; margin-bottom:24px; }
+  .stat { background:#11151d; border:1px solid var(--line); border-radius:9px; padding:12px 8px; }
+  .stat .n { font-size:22px; font-weight:600; }
+  .stat .l { font-size:11px; color:var(--faint); text-transform:uppercase; letter-spacing:.6px; }
+  footer { color:var(--faint); font-size:11.5px; }
+  footer .u { color:var(--dim); }
+</style>
+</head>
+<body>
+<div class="card">
+  <h1>🧠 lewis's brain</h1>
+  <div class="sub">an autonomous claude-powered home server</div>
+  <div class="pulse"><span class="dot" id="dot"></span><span id="state">…</span></div>
+  <div class="doing" id="doing"></div>
+  <div class="grid">
+    <div class="stat"><div class="n" id="n-today">–</div><div class="l">jobs today</div></div>
+    <div class="stat"><div class="n" id="n-done">–</div><div class="l">jobs all-time</div></div>
+    <div class="stat"><div class="n" id="n-backlog">–</div><div class="l">tasks queued</div></div>
+    <div class="stat"><div class="n" id="n-uptime">–</div><div class="l">uptime</div></div>
+  </div>
+  <footer>as of <span class="u" id="updated">…</span> · publishes when something changes</footer>
+</div>
+<script>
+async function load(){
+  try {
+    const r = await fetch('status.json?_=' + Date.now(), {cache:'no-store'});
+    const d = await r.json();
+    const on = d.state === 'working';
+    document.getElementById('dot').className = 'dot' + (on ? ' on' : '');
+    document.getElementById('state').textContent = on ? 'working' : 'idle';
+    document.getElementById('doing').textContent =
+      on ? `a ${d.current_role || 'worker'} agent is on the job` : 'waiting for work';
+    document.getElementById('n-today').textContent = d.today_done ?? '–';
+    document.getElementById('n-done').textContent = d.total_done ?? '–';
+    document.getElementById('n-backlog').textContent = d.backlog_open ?? '–';
+    document.getElementById('n-uptime').textContent = d.uptime ?? '–';
+    document.getElementById('updated').textContent = d.updated ?? '?';
+  } catch(e){ /* static host; just try again next round */ }
+}
+load();
+setInterval(load, 60000);
+</script>
+</body>
+</html>
