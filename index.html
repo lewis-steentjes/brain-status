@@ -6,47 +6,109 @@
 <title>lewis's brain</title>
 <style>
   :root { --bg:#0d1117; --panel:#161b22; --line:#2b3444; --ink:#e6edf3;
-          --dim:#8b949e; --faint:#6e7681; --on:#3fb950; --off:#6e7681;
+          --dim:#8b949e; --faint:#6e7681; --on:#3fb950; --off:#6e7681; --link:#58a6ff;
           --mono:'SFMono-Regular',ui-monospace,'JetBrains Mono',Menlo,Consolas,monospace; }
   * { box-sizing:border-box; }
   body { margin:0; background:var(--bg); color:var(--ink); font:15px/1.6 var(--mono);
-         min-height:100vh; display:flex; align-items:center; justify-content:center; }
-  .card { max-width:560px; width:92%; background:var(--panel); border:1px solid var(--line);
-          border-radius:14px; padding:34px 36px; text-align:center; }
+         min-height:100vh; padding:28px 16px; }
+  .wrap { max-width:720px; margin:0 auto; }
+  .card { background:var(--panel); border:1px solid var(--line); border-radius:14px;
+          padding:22px 24px; margin-bottom:16px; }
+  .head { text-align:center; }
   h1 { font-size:22px; margin:0 0 4px; letter-spacing:.5px; }
-  .sub { color:var(--dim); font-size:12.5px; margin-bottom:26px; }
-  .pulse { display:inline-flex; align-items:center; gap:10px; font-size:17px; margin-bottom:6px; }
+  .sub { color:var(--dim); font-size:12.5px; margin-bottom:20px; }
+  .pulse { display:inline-flex; align-items:center; gap:10px; font-size:17px; }
   .dot { width:12px; height:12px; border-radius:50%; background:var(--off); }
   .dot.on { background:var(--on); animation:pulse 2s infinite; }
   @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.25} }
-  .doing { color:var(--dim); font-size:13px; min-height:20px; margin-bottom:26px; }
-  .grid { display:grid; grid-template-columns:repeat(2,1fr); gap:12px; margin-bottom:24px; }
-  .stat { background:#11151d; border:1px solid var(--line); border-radius:9px; padding:12px 8px; }
-  .stat .n { font-size:22px; font-weight:600; }
-  .stat .l { font-size:11px; color:var(--faint); text-transform:uppercase; letter-spacing:.6px; }
-  footer { color:var(--faint); font-size:11.5px; }
-  footer .u { color:var(--dim); }
+  .doing { color:var(--dim); font-size:13px; min-height:20px; margin-top:6px; }
+  .grid { display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin-top:18px; }
+  .stat { background:#11151d; border:1px solid var(--line); border-radius:9px; padding:10px 6px; text-align:center; }
+  .stat .n { font-size:20px; font-weight:600; }
+  .stat .l { font-size:10px; color:var(--faint); text-transform:uppercase; letter-spacing:.5px; }
+  .h2 { font-size:12px; color:var(--faint); text-transform:uppercase; letter-spacing:.7px; margin:0 0 12px; }
+  .recent { display:flex; flex-wrap:wrap; gap:8px; }
+  .chip { background:#11151d; border:1px solid var(--line); border-radius:20px; padding:4px 11px; font-size:12px; }
+  .chip .ago { color:var(--faint); }
+  .dgmeta { color:var(--faint); font-size:11.5px; margin-bottom:10px; }
+  .dg-h { font-weight:600; margin:16px 0 6px; font-size:14px; }
+  .dg-p { margin:6px 0; }
+  .dg-ul { margin:6px 0; padding-left:20px; }
+  .dg-ul li { margin:3px 0; }
+  .dg-hr { border:0; border-top:1px solid var(--line); margin:14px 0; }
+  .digest a { color:var(--link); }
+  .digest code { background:#11151d; padding:1px 5px; border-radius:4px; font-size:.92em; }
+  .empty { color:var(--faint); font-size:13px; }
+  footer { color:var(--faint); font-size:11.5px; text-align:center; margin-top:4px; }
+  footer a, footer .u { color:var(--dim); }
+  @media(max-width:520px){ .grid{grid-template-columns:repeat(2,1fr);} }
 </style>
 </head>
 <body>
-<div class="card">
-  <h1>🧠 lewis's brain</h1>
-  <div class="sub">an autonomous claude-powered home server</div>
-  <div class="pulse"><span class="dot" id="dot"></span><span id="state">…</span></div>
-  <div class="doing" id="doing"></div>
-  <div class="grid">
-    <div class="stat"><div class="n" id="n-today">–</div><div class="l">jobs today</div></div>
-    <div class="stat"><div class="n" id="n-done">–</div><div class="l">jobs all-time</div></div>
-    <div class="stat"><div class="n" id="n-backlog">–</div><div class="l">tasks queued</div></div>
-    <div class="stat"><div class="n" id="n-uptime">–</div><div class="l">uptime</div></div>
+<div class="wrap">
+  <div class="card head">
+    <h1>🧠 lewis's brain</h1>
+    <div class="sub">an autonomous claude-powered home server</div>
+    <div class="pulse"><span class="dot" id="dot"></span><span id="state">…</span></div>
+    <div class="doing" id="doing"></div>
+    <div class="grid">
+      <div class="stat"><div class="n" id="n-today">–</div><div class="l">today</div></div>
+      <div class="stat"><div class="n" id="n-done">–</div><div class="l">all-time</div></div>
+      <div class="stat"><div class="n" id="n-backlog">–</div><div class="l">queued</div></div>
+      <div class="stat"><div class="n" id="n-uptime">–</div><div class="l">uptime</div></div>
+    </div>
   </div>
-  <footer>as of <span class="u" id="updated">…</span> · publishes when something changes</footer>
+
+  <div class="card">
+    <div class="h2">recent activity</div>
+    <div class="recent" id="recent"><span class="empty">…</span></div>
+  </div>
+
+  <div class="card">
+    <div class="h2">latest digest</div>
+    <div class="dgmeta" id="dgmeta"></div>
+    <div class="digest" id="digest"><span class="empty">…</span></div>
+  </div>
+
+  <footer>as of <span class="u" id="updated">…</span> · publishes when something changes ·
+    <a href="https://github.com/lewis-steentjes/claude-brain" target="_blank" rel="noopener">how it works</a></footer>
 </div>
 <script>
+function esc(s){ return (s==null?'':String(s)).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+// Digest markdown -> HTML. Same small subset the digest emits (## headings,
+// - bullets, **bold**, links, `code`). esc() FIRST, then inline md on safe text.
+function mdInline(s){
+  return s
+    .replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g,'<a href="$2" target="_blank" rel="noopener">$1</a>')
+    .replace(/\*\*(.+?)\*\*/g,'<b>$1</b>')
+    .replace(/`([^`]+)`/g,'<code>$1</code>');
+}
+function mdToHtml(markdown){
+  const lines = esc(markdown||'').split('\n');
+  let html = '', inList = false;
+  const closeList = () => { if (inList){ html += '</ul>'; inList = false; } };
+  for (const raw of lines){
+    const line = raw.replace(/\s+$/,'');
+    if (/^#{1,3}\s+/.test(line)){ closeList(); html += `<div class="dg-h">${mdInline(line.replace(/^#{1,3}\s+/,''))}</div>`; }
+    else if (/^\s*([-*_])\1{2,}\s*$/.test(line)){ closeList(); html += '<hr class="dg-hr">'; }
+    else if (/^[-*]\s+/.test(line)){ if (!inList){ html += '<ul class="dg-ul">'; inList = true; } html += `<li>${mdInline(line.replace(/^[-*]\s+/,''))}</li>`; }
+    else if (line.trim() === ''){ closeList(); }
+    else { closeList(); html += `<div class="dg-p">${mdInline(line)}</div>`; }
+  }
+  closeList();
+  return html;
+}
+function ago(t){
+  if (!t) return '';
+  const s = Math.max(0, Math.floor(Date.now()/1000 - t));
+  if (s < 90) return 'just now';
+  const m = Math.floor(s/60); if (m < 60) return m + 'm ago';
+  const h = Math.floor(m/60); if (h < 24) return h + 'h ago';
+  return Math.floor(h/24) + 'd ago';
+}
 async function load(){
   try {
-    const r = await fetch('status.json?_=' + Date.now(), {cache:'no-store'});
-    const d = await r.json();
+    const d = await (await fetch('status.json?_=' + Date.now(), {cache:'no-store'})).json();
     const on = d.state === 'working';
     document.getElementById('dot').className = 'dot' + (on ? ' on' : '');
     document.getElementById('state').textContent = on ? 'working' : 'idle';
@@ -57,7 +119,20 @@ async function load(){
     document.getElementById('n-backlog').textContent = d.backlog_open ?? '–';
     document.getElementById('n-uptime').textContent = d.uptime ?? '–';
     document.getElementById('updated').textContent = d.updated ?? '?';
-  } catch(e){ /* static host; just try again next round */ }
+    const rec = Array.isArray(d.recent) ? d.recent : [];
+    document.getElementById('recent').innerHTML = rec.length
+      ? rec.map(r => `<span class="chip">${esc(r.role || '?')} <span class="ago">${esc(ago(r.t))}</span></span>`).join('')
+      : '<span class="empty">no jobs yet</span>';
+  } catch(e){ /* static host; try again next round */ }
+  try {
+    const dg = await (await fetch('digest.json?_=' + Date.now(), {cache:'no-store'})).json();
+    if (dg && dg.markdown && dg.markdown.trim()){
+      document.getElementById('dgmeta').textContent = dg.generated ? `generated ${dg.generated}` : '';
+      document.getElementById('digest').innerHTML = mdToHtml(dg.markdown);
+    } else {
+      document.getElementById('digest').innerHTML = '<span class="empty">no digest yet</span>';
+    }
+  } catch(e){ document.getElementById('digest').innerHTML = '<span class="empty">no digest yet</span>'; }
 }
 load();
 setInterval(load, 60000);
