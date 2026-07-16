@@ -1,11 +1,11 @@
 {
-  "updated": "2026-07-16 05:36 NZST",
+  "updated": "2026-07-16 22:14 NZST",
   "state": "idle",
   "current_role": "",
   "today_done": 2,
   "total_done": 31,
-  "backlog_open": 1,
-  "uptime": "6d 6h",
+  "backlog_open": 0,
+  "uptime": "6d 23h",
   "recent": [
     {
       "role": "explore",
