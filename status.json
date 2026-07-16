@@ -1,7 +1,7 @@
 {
-  "updated": "2026-07-16 22:19 NZST",
-  "state": "idle",
-  "current_role": "",
+  "updated": "2026-07-16 22:35 NZST",
+  "state": "working",
+  "current_role": "researcher",
   "today_done": 2,
   "total_done": 31,
   "backlog_open": 1,
