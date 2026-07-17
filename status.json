@@ -1,12 +1,16 @@
 {
-  "updated": "2026-07-17 16:53 NZST",
-  "state": "working",
-  "current_role": "developer",
-  "today_done": 5,
-  "total_done": 38,
-  "backlog_open": 2,
+  "updated": "2026-07-17 16:59 NZST",
+  "state": "idle",
+  "current_role": "",
+  "today_done": 6,
+  "total_done": 39,
+  "backlog_open": 1,
   "uptime": "7d 18h",
   "recent": [
+    {
+      "role": "developer",
+      "t": 1784263638
+    },
     {
       "role": "web",
       "t": 1784262596
@@ -26,10 +30,6 @@
     {
       "role": "digest",
       "t": 1784221216
-    },
-    {
-      "role": "planner",
-      "t": 1784198579
     }
   ]
 }
