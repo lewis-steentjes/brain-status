@@ -1,12 +1,16 @@
 {
-  "updated": "2026-07-25 05:02 NZST",
-  "state": "working",
-  "current_role": "digest",
-  "today_done": 0,
-  "total_done": 60,
+  "updated": "2026-07-25 05:07 NZST",
+  "state": "idle",
+  "current_role": "",
+  "today_done": 1,
+  "total_done": 61,
   "backlog_open": 0,
   "uptime": "15d 6h",
   "recent": [
+    {
+      "role": "digest",
+      "t": 1784912419
+    },
     {
       "role": "explore",
       "t": 1784827811
@@ -26,10 +30,6 @@
     {
       "role": "coach-fitness",
       "t": 1784780995
-    },
-    {
-      "role": "coach-fitness",
-      "t": 1784780946
     }
   ]
 }
