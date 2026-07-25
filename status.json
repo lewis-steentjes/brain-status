@@ -1,11 +1,11 @@
 {
-  "updated": "2026-07-26 00:01 NZST",
-  "state": "idle",
-  "current_role": "",
+  "updated": "2026-07-26 05:02 NZST",
+  "state": "working",
+  "current_role": "digest",
   "today_done": 0,
   "total_done": 63,
   "backlog_open": 0,
-  "uptime": "16d 1h",
+  "uptime": "16d 6h",
   "recent": [
     {
       "role": "coach-fitness",
