@@ -1,11 +1,11 @@
 {
-  "updated": "2026-08-10 05:32 NZST",
-  "state": "idle",
-  "current_role": "",
+  "updated": "2026-08-10 06:04 NZST",
+  "state": "working",
+  "current_role": "librarian",
   "today_done": 2,
   "total_done": 97,
   "backlog_open": 0,
-  "uptime": "31d 6h",
+  "uptime": "31d 7h",
   "recent": [
     {
       "role": "explore",
