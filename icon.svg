@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <!-- Source for the PNG icons. Three nodes distilling upward into one:
+       the log -> topic direction the librarian actually works in. -->
+  <rect width="512" height="512" fill="#0f1115"/>
+  <g stroke="#2f3644" stroke-width="14" stroke-linecap="round">
+    <path d="M146 342 L256 214"/>
+    <path d="M256 366 L256 214"/>
+    <path d="M366 342 L256 214"/>
+  </g>
+  <circle cx="256" cy="200" r="40" fill="#4ec9a0"/>
+  <circle cx="140" cy="352" r="27" fill="#6fa8ff"/>
+  <circle cx="256" cy="378" r="27" fill="#6fa8ff"/>
+  <circle cx="372" cy="352" r="27" fill="#6fa8ff"/>
+</svg>
